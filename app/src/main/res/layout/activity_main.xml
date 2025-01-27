@@ -20,7 +20,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="598dp"
-            android:src="@drawable/LogoAppli" />
+            android:src="@drawable/logoappli" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,7 +37,9 @@
                 android:color="@color/white"
                 android:padding="18dp"
                 android:text="Login"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                app:cornerRadius="20px" />
 
             <Button
                 android:id="@+id/button"
@@ -48,11 +50,12 @@
                 android:layout_weight="0.5"
                 android:backgroundTint="#0077B6"
                 android:color="@color/white"
+                android:textColor="@color/white"
                 android:padding="18dp"
                 android:text="Sign Up"
                 android:textSize="20sp"
 
-                />
+                app:cornerRadius="20px" />
         </LinearLayout>
 
     </LinearLayout>
