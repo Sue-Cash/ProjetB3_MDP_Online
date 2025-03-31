@@ -32,25 +32,12 @@
         android:paddingBottom="100dp">
 
 
-        <Button
-            android:id="@+id/btnSignUp"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Up"
-            android:backgroundTint="#03045E"
-            android:layout_weight="0.5"
-            android:layout_margin="10dp"/>
-
-
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:backgroundTint="#0077B6"
-        android:layout_weight="0.5"
-        android:layout_margin="10dp"/>
-
+            android:text="LOGIN PAGE"
+            android:textSize="24sp"
+            android:textColor="@android:color/black" />
 
 
     </LinearLayout>
