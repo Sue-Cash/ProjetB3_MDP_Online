@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/signup_login_background"
+    android:background="@drawable/login_background"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:src="@drawable/logo_main"/>
+            android:src="@drawable/logo_appli"/>
 
     </LinearLayout>
 
