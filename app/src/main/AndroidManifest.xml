@@ -24,8 +24,12 @@
         </activity>
 
         <!-- Declaration Des nouvelles page -->
-        <activity android:name=".SignupActivity" />
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
+        <activity android:name=".PasswordAllActivity" />
+        <activity android:name=".PasswordGroupesActivity" />
+
+
 
     </application>
 
