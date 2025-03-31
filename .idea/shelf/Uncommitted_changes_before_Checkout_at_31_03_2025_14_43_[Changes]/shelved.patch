@@ -1,0 +1,35 @@
+Index: app/src/main/res/layout/activity_password_groupes.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<RelativeLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"#FFFFFF\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <!-- Title at the top -->\r\n    <TextView\r\n        android:id=\"@+id/tvPasswords\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Passwords\"\r\n        android:textSize=\"32sp\"\r\n        android:textColor=\"#03045E\"\r\n        android:layout_marginTop=\"50dp\"\r\n        android:layout_centerHorizontal=\"true\" />\r\n\r\n    <!-- 2x2 GridLayout for the four cards -->\r\n    <GridLayout\r\n        android:id=\"@+id/gridLayout\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_below=\"@id/tvPasswords\"\r\n        android:layout_marginTop=\"30dp\"\r\n        android:columnCount=\"2\"\r\n        android:rowCount=\"2\"\r\n        android:alignmentMode=\"alignMargins\"\r\n        android:useDefaultMargins=\"true\"\r\n        android:padding=\"16dp\">\r\n\r\n        <!-- Card 1: All -->\r\n        <LinearLayout\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_columnWeight=\"1\"\r\n            android:layout_rowWeight=\"1\"\r\n            android:orientation=\"vertical\"\r\n            android:gravity=\"center\"\r\n            android:layout_margin=\"8dp\"\r\n            android:padding=\"16dp\"\r\n            android:background=\"#03045E\">\r\n\r\n            <ImageView\r\n                android:layout_width=\"60dp\"\r\n                android:layout_height=\"60dp\"\r\n                android:src=\"@drawable/Keys\" />\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"All\"\r\n                android:textColor=\"@color/white\"\r\n                android:textSize=\"18sp\"\r\n                android:layout_marginTop=\"8dp\" />\r\n\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <!-- Card 2: Wi-Fi -->\r\n        <LinearLayout\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_columnWeight=\"1\"\r\n            android:layout_rowWeight=\"1\"\r\n            android:orientation=\"vertical\"\r\n            android:gravity=\"center\"\r\n            android:layout_margin=\"8dp\"\r\n            android:padding=\"16dp\"\r\n            android:background=\"#03045E\">\r\n\r\n            <ImageView\r\n                android:layout_width=\"60dp\"\r\n                android:layout_height=\"60dp\"\r\n                android:src=\"@drawable/Wifi\" />\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Wi-Fi\"\r\n                android:textColor=\"@android:color/white\"\r\n                android:textSize=\"18sp\"\r\n                android:layout_marginTop=\"8dp\" />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <!-- Card 3: Deleted -->\r\n        <LinearLayout\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_columnWeight=\"1\"\r\n            android:layout_rowWeight=\"1\"\r\n            android:orientation=\"vertical\"\r\n            android:gravity=\"center\"\r\n            android:layout_margin=\"8dp\"\r\n            android:padding=\"16dp\"\r\n            android:background=\"#03045E\">\r\n\r\n            <ImageView\r\n                android:layout_width=\"60dp\"\r\n                android:layout_height=\"60dp\"\r\n                android:src=\"@drawable/Deleted\" />\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Deleted\"\r\n                android:textColor=\"@android:color/white\"\r\n                android:textSize=\"18sp\"\r\n                android:layout_marginTop=\"8dp\" />\r\n\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <!-- Card 4: Security -->\r\n        <LinearLayout\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_columnWeight=\"1\"\r\n            android:layout_rowWeight=\"1\"\r\n            android:orientation=\"vertical\"\r\n            android:gravity=\"center\"\r\n            android:layout_margin=\"8dp\"\r\n            android:padding=\"16dp\"\r\n            android:background=\"#03045E\">\r\n\r\n            <ImageView\r\n                android:layout_width=\"60dp\"\r\n                android:layout_height=\"60dp\"\r\n                android:src=\"@drawable/Security\" />\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Security\"\r\n                android:textColor=\"@android:color/white\"\r\n                android:textSize=\"18sp\"\r\n                android:layout_marginTop=\"8dp\" />\r\n\r\n\r\n\r\n        </LinearLayout>\r\n\r\n    </GridLayout>\r\n\r\n</RelativeLayout>\r\n
+===================================================================
+diff --git a/app/src/main/res/layout/activity_password_groupes.xml b/app/src/main/res/layout/activity_password_groupes.xml
+--- a/app/src/main/res/layout/activity_password_groupes.xml	(revision 84ddb6065482f63e3f1218879507912e76fc4b9d)
++++ b/app/src/main/res/layout/activity_password_groupes.xml	(date 1743423800520)
+@@ -77,7 +77,7 @@
+             <ImageView
+                 android:layout_width="60dp"
+                 android:layout_height="60dp"
+-                android:src="@drawable/Wifi" />
++                android:src="@drawable/wifi" />
+ 
+             <TextView
+                 android:layout_width="wrap_content"
+@@ -105,7 +105,7 @@
+             <ImageView
+                 android:layout_width="60dp"
+                 android:layout_height="60dp"
+-                android:src="@drawable/Deleted" />
++                android:src="@drawable/deleted" />
+ 
+             <TextView
+                 android:layout_width="wrap_content"
+@@ -134,7 +134,7 @@
+             <ImageView
+                 android:layout_width="60dp"
+                 android:layout_height="60dp"
+-                android:src="@drawable/Security" />
++                android:src="@drawable/security" />
+ 
+             <TextView
+                 android:layout_width="wrap_content"
