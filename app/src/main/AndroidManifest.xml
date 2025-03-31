@@ -28,7 +28,6 @@
 
         <!-- Declaration Des nouvelles page -->
         <activity android:name=".SignupActivity" />
-        <activity android:name=".LoginActivity" />
 
     </application>
 
