@@ -14,6 +14,22 @@
         android:gravity="top"
         android:orientation="vertical">
 
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="19dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Retour"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textSize="40sp"
+            android:textColor="#03045E"
+            android:layout_marginBottom="16dp"/>
+
         <EditText
             android:id="@+id/email_input"
             android:layout_width="match_parent"

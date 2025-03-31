@@ -20,7 +20,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="598dp"
-            android:src="@drawable/logoappli" />
+            android:src="@drawable/logo_appli" />
 
         <LinearLayout
             android:layout_width="match_parent"
