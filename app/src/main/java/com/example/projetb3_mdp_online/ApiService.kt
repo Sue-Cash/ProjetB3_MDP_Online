@@ -14,6 +14,12 @@ interface ApiService {
     @GET("passwords/index.php")
     fun getPasswordById(@Query("id") id: Int): Call<PasswordResponse>
 
+    @GET("users/index.php")
+    suspend fun getUserByEmail(@Query("email") email: String): Response<ApiResponse>
+
+    @POST("users/index.php")
+    suspend fun registerUser(@Body request: RegisterRequest): Response<ApiResponse>
+    
     @PUT("passwords/index.php")
     fun updatePassword(@Body passwordUpdate: PasswordUpdateRequest): Call<PasswordResponse>
 }

@@ -1,46 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
-    tools:context=".MainActivity">
+    android:gravity="center"
+    tools:context=".SignUpActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:gravity="top"
         android:orientation="vertical"
-        android:layout_marginTop="130dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
-        <ImageView
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:src="@drawable/logo_appli"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"
-        android:paddingBottom="100dp">
-
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Retour"
+            android:src="@drawable/back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SIGN UP PAGE"
-            android:textSize="24sp"
-            android:textColor="@android:color/black" />
+            android:layout_marginVertical="16dp"
+            android:text="Register"
+            android:textColor="#03045E"
+            android:textSize="45sp" />
 
+        <EditText
+            android:id="@+id/email_input"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Email address"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textColor="#03045E"
+            android:textColorHint="#8003045E"
+            android:textSize="20sp">
+        </EditText>
 
+        <EditText
+            android:id="@+id/password_input"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:hint="Create password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textColor="#03045E"
+            android:textColorHint="#8003045E"
+            android:textSize="20sp">
+        </EditText>
+
+        <EditText
+            android:id="@+id/confirm_input"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:hint="Confirm password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textColor="#03045E"
+            android:textColorHint="#8003045E"
+            android:textSize="20sp">
+        </EditText>
+
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NEXT"
+            android:backgroundTint="#03045E"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp">
+        </Button>
     </LinearLayout>
-
 
 </RelativeLayout>
