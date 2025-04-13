@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetB3_MDP_Online"
         tools:targetApi="31">
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -22,15 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Declaration Des nouvelles page -->
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".PasswordAllActivity" />
         <activity android:name=".PasswordGroupesActivity" />
-
-
-
     </application>
 
 </manifest>
