@@ -13,6 +13,15 @@
         android:theme="@style/Theme.ProjetB3_MDP_Online"
         tools:targetApi="31">
         <activity
+            android:name=".PasswordDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NewPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -26,5 +35,6 @@
         <activity android:name=".PasswordAllActivity" />
         <activity android:name=".PasswordGroupesActivity" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

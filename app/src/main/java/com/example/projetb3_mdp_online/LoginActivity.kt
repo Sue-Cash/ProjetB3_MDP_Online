@@ -15,6 +15,9 @@ import androidx.core.view.WindowInsetsCompat
 
 class LoginActivity : AppCompatActivity() {
 
+    // Flag pour activer le mode debug (désactiver en production !)
+    private val DEBUG_MODE = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,6 +36,12 @@ class LoginActivity : AppCompatActivity() {
         // Setup login button to require biometric authentication before redirection.
         val btnLogin = findViewById<Button>(R.id.loginButton)
         btnLogin.setOnClickListener {
+            // Si le mode debug est activé, on passe directement à l'écran suivant
+            if (DEBUG_MODE) {
+                Toast.makeText(applicationContext, "Mode debug: authentification ignorée", Toast.LENGTH_SHORT).show()
+                navigateToPasswordGroupes()
+                return@setOnClickListener
+            }
 
             // Optional: Check if biometric authentication is available on this device.
             val biometricManager = BiometricManager.from(this)
@@ -68,8 +77,7 @@ class LoginActivity : AppCompatActivity() {
                     super.onAuthenticationSucceeded(result)
                     Toast.makeText(applicationContext, "Authentication succeeded!", Toast.LENGTH_SHORT).show()
                     // Redirect to PasswordGroupesActivity upon successful authentication
-                    val intent = Intent(this@LoginActivity, PasswordGroupesActivity::class.java)
-                    startActivity(intent)
+                    navigateToPasswordGroupes()
                 }
 
                 override fun onAuthenticationFailed() {
@@ -88,5 +96,18 @@ class LoginActivity : AppCompatActivity() {
             // Show the biometric prompt
             biometricPrompt.authenticate(promptInfo)
         }
+
+        // Ajout d'un bouton de débogage (optionnel - vous pouvez l'ajouter dans votre layout)
+        // Si vous n'avez pas de bouton de débogage dans votre layout, ignorez cette partie
+        // val btnDebug = findViewById<Button>(R.id.debugButton)
+        // btnDebug.setOnClickListener {
+        //     navigateToPasswordGroupes()
+        // }
+    }
+
+    // Méthode extraite pour éviter la duplication de code
+    private fun navigateToPasswordGroupes() {
+        val intent = Intent(this@LoginActivity, PasswordGroupesActivity::class.java)
+        startActivity(intent)
     }
 }
