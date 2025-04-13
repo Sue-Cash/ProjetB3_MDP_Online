@@ -17,6 +17,7 @@ import com.example.projetb3_mdp_online.ApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.mindrot.jbcrypt.BCrypt
 import java.io.IOException
 
 class LoginActivity : AppCompatActivity() {
@@ -61,18 +62,24 @@ class LoginActivity : AppCompatActivity() {
                                 val apiResponse = response.body()
                                 if (apiResponse != null && apiResponse.status == 200 && apiResponse.data != null) {
                                     val userData = apiResponse.data
-                                    Log.w("LoginActivity", "Vérification de body de la req : ${userData}")
 
-                                    if (verifyPassword(password, userData.password_hash ?: "")) {
-                                        // Connexion réussie !
-                                        Toast.makeText(this@LoginActivity, "Connexion réussie pour ${email}!", Toast.LENGTH_LONG).show()
-                                        // Naviguer vers l'activité principale (remplacez MainActivity::class.java)
-                                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                                         startActivity(intent)
-                                         finish() // fermer l'activité Login
-                                    } else {
-                                        // Mot de passe incorrect
-                                        Toast.makeText(this@LoginActivity, "Email ou mot de passe incorrect.", Toast.LENGTH_SHORT).show()
+                                    // Lancer la vérification dans un thread IO pour ne pas bloquer l'UI
+                                    lifecycleScope.launch(Dispatchers.IO) {
+                                        val passwordMatches = BCrypt.checkpw(password, userData.password_hash)
+
+                                        withContext(Dispatchers.Main) {
+                                            if (passwordMatches) {
+                                                // Connexion réussie !
+                                                Toast.makeText(this@LoginActivity, "Connexion réussie !", Toast.LENGTH_LONG).show()
+                                                // Naviguer vers l'activité principale (remplacez MainActivity::class.java)
+                                                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                                startActivity(intent)
+                                                finish() // fermer l'activité Login
+                                            } else {
+                                                // Mot de passe incorrect
+                                                Toast.makeText(this@LoginActivity, "Email ou mot de passe incorrect.", Toast.LENGTH_SHORT).show()
+                                            }
+                                        }
                                     }
 
                                 } else {
@@ -105,18 +112,4 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
-    private fun verifyPassword(inputPassword: String, storedHash: String): Boolean {
-        // Si le mot de passe est stocké en clair (pour les tests)
-        if (inputPassword == storedHash) return true
-
-        // Si vous utilisez bcrypt ou une autre méthode de hachage,
-        // vous devrez utiliser la bibliothèque appropriée
-        // Exemple avec BCrypt:
-        // return BCrypt.checkpw(inputPassword, storedHash)
-
-        // Pour le moment, retourner false si les chaînes ne correspondent pas directement
-        return false
-    }
-
 }
