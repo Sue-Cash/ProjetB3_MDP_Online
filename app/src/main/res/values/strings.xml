@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProjetB3_MDP_Online</string>
+    <string name="app_name">K2NA</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
