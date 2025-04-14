@@ -17,6 +17,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.example.projetb3_mdp_online.api.ApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -116,6 +117,10 @@ class LoginActivity : AppCompatActivity() {
                                                         override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                                                             super.onAuthenticationSucceeded(result)
                                                             Toast.makeText(this@LoginActivity, "Authentification réussie !", Toast.LENGTH_SHORT).show()
+                                                            val intent = Intent(this@LoginActivity, PasswordGroupesActivity::class.java)
+                                                            intent.putExtra("USER_ID", userData.user_id) // Passer l'ID utilisateur
+                                                            startActivity(intent)
+                                                            finish()
                                                             proceedToApp()
                                                         }
 
