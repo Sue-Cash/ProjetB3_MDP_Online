@@ -1,8 +1,11 @@
 package com.example.projetb3_mdp_online.api
 
+import com.example.projetb3_mdp_online.ApiResponse
 import com.example.projetb3_mdp_online.PasswordResponse
 import com.example.projetb3_mdp_online.PasswordUpdateRequest
+import com.example.projetb3_mdp_online.RegisterRequest
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
