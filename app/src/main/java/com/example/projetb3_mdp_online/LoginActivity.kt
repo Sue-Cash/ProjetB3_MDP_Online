@@ -98,6 +98,7 @@ class LoginActivity : AppCompatActivity() {
                                                             super.onAuthenticationSucceeded(result)
                                                             Toast.makeText(this@LoginActivity, "Authentification réussie !", Toast.LENGTH_SHORT).show()
                                                             val intent = Intent(this@LoginActivity, PasswordGroupesActivity::class.java)
+                                                            intent.putExtra("USER_ID", userData.user_id) // Passer l'ID utilisateur
                                                             startActivity(intent)
                                                             finish()
                                                         }

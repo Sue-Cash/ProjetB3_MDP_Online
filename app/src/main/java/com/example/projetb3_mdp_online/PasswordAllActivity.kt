@@ -25,7 +25,7 @@ class PasswordAllActivity : AppCompatActivity() {
     private lateinit var itemsContainer: LinearLayout
     private lateinit var progressIndicator: CircularProgressIndicator
 
-    private val userId = 14 // ID de l'utilisateur pour les tests
+    private var userId = -1 // Valeur par défaut, sera remplacée par la valeur passée
     private var passwordsList = listOf<PasswordData>() // Liste des mots de passe
 
     // Définir le lanceur d'activité pour ajouter un mot de passe
@@ -41,6 +41,18 @@ class PasswordAllActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_password_all)
+
+        // Récupérer l'ID utilisateur passé par PasswordGroupesActivity
+        if (intent.hasExtra("USER_ID")) {
+            userId = intent.getIntExtra("USER_ID", -1)
+        }
+
+        // Vérifier que l'ID utilisateur est valide
+        if (userId == -1) {
+            Toast.makeText(this, "Erreur: ID utilisateur non valide", Toast.LENGTH_SHORT).show()
+            finish() // Terminer l'activité si aucun ID utilisateur valide n'est fourni
+            return
+        }
 
         // Initialisation des vues
         searchBar = findViewById(R.id.searchBar)
@@ -58,9 +70,9 @@ class PasswordAllActivity : AppCompatActivity() {
         // Configuration du bouton d'ajout de mot de passe
         addButtonContainer.setOnClickListener {
             val intent = Intent(this, NewPasswordActivity::class.java)
-            intent.putExtra("USER_ID", userId)
+            intent.putExtra("USER_ID", userId) // Passer l'ID utilisateur récupéré
             intent.putExtra("CATEGORY_ID", 2)
-            addPasswordLauncher.launch(intent) // Utiliser le lanceur au lieu de startActivityForResult
+            addPasswordLauncher.launch(intent)
         }
 
         // Configuration de la recherche
@@ -68,7 +80,7 @@ class PasswordAllActivity : AppCompatActivity() {
             filterPasswordsAndRefreshUI(text.toString())
         }
 
-        // Charger les mots de passe
+        // Charger les mots de passe avec l'ID utilisateur récupéré
         loadPasswords()
     }
 
@@ -76,7 +88,7 @@ class PasswordAllActivity : AppCompatActivity() {
         // Afficher l'indicateur de progression
         progressIndicator.visibility = View.VISIBLE
 
-        // Effectuer l'appel API
+        // Effectuer l'appel API avec l'ID utilisateur récupéré
         ApiClient.apiService.getPasswordsByUserId(userId).enqueue(object : Callback<PasswordsResponse> {
             override fun onResponse(call: Call<PasswordsResponse>, response: Response<PasswordsResponse>) {
                 // Cacher l'indicateur de progression
@@ -170,7 +182,7 @@ class PasswordAllActivity : AppCompatActivity() {
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     1 // 1dp de hauteur
                 )
-                separator.setBackgroundColor(getColor(R.color.separator_color)) // Définir une couleur dans colors.xml
+                separator.setBackgroundColor(getColor(R.color.separator_color))
                 itemsContainer.addView(separator)
             }
         }
