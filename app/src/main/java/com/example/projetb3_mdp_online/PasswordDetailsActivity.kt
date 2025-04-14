@@ -13,7 +13,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.projetb3_mdp_online.api.ApiClient
 import com.example.projetb3_mdp_online.PasswordData
-import com.example.projetb3_mdp_online.PasswordResponse
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.switchmaterial.SwitchMaterial
 import retrofit2.Call
@@ -30,7 +29,7 @@ class PasswordDetailsActivity : AppCompatActivity() {
     private lateinit var togglePasswordVisibility: ImageButton
     private lateinit var progressIndicator: CircularProgressIndicator
 
-    private var passwordId: Long = 2 // Par défaut, on récupère l'ID 2 pour les tests
+    private var passwordId: Long = 0
     private var actualPassword: String = "" // Pour stocker le mot de passe actuel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,9 +43,9 @@ class PasswordDetailsActivity : AppCompatActivity() {
         }
 
         // Récupère l'ID du mot de passe depuis l'intent (pour une utilisation future)
-        //if (intent.hasExtra("PASSWORD_ID")) {
-        //    passwordId = intent.getLongExtra("PASSWORD_ID", 2)
-        //}
+        if (intent.hasExtra("PASSWORD_ID")) {
+            passwordId = intent.getLongExtra("PASSWORD_ID", 0)
+        }
 
         // Initialise les vues
         siteValue = findViewById(R.id.siteValue)

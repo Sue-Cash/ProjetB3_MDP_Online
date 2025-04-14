@@ -28,7 +28,7 @@ class EditPasswordActivity : AppCompatActivity() {
     private lateinit var biometricSwitch: SwitchMaterial
     private lateinit var progressIndicator: CircularProgressIndicator
 
-    private var passwordId: Int = 2 // Par défaut pour les tests
+    private var passwordId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class EditPasswordActivity : AppCompatActivity() {
 
         // Récupère l'ID du mot de passe depuis l'intent
         if (intent.hasExtra("PASSWORD_ID")) {
-            passwordId = intent.getLongExtra("PASSWORD_ID", 2).toInt()
+            passwordId = intent.getLongExtra("PASSWORD_ID", 0).toInt()
         }
 
         // Récupère les informations du mot de passe depuis les extras
