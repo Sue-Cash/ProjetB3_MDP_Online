@@ -24,6 +24,15 @@
             android:contentDescription="Retour"
             android:src="@drawable/back" />
 
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:indicatorColor="#03045E" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
