@@ -117,12 +117,9 @@ class LoginActivity : AppCompatActivity() {
                                                         override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                                                             super.onAuthenticationSucceeded(result)
                                                             Toast.makeText(this@LoginActivity, "Authentification réussie !", Toast.LENGTH_SHORT).show()
-                                                            val intent = Intent(this@LoginActivity, PasswordGroupesActivity::class.java)
-                                                            intent.putExtra("USER_ID", userData.user_id) // Passer l'ID utilisateur
-                                                            startActivity(intent)
-                                                            finish()
-                                                            proceedToApp()
+                                                            proceedToApp(userData.user_id) // Passer l'ID utilisateur à proceedToApp
                                                         }
+
 
                                                         override fun onAuthenticationFailed() {
                                                             super.onAuthenticationFailed()
@@ -176,8 +173,11 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun proceedToApp() {
+    private fun proceedToApp(userId: Int = -1) {
         val intent = Intent(this@LoginActivity, PasswordGroupesActivity::class.java)
+        if (userId != -1) {
+            intent.putExtra("USER_ID", userId)
+        }
         startActivity(intent)
         finish()
     }
