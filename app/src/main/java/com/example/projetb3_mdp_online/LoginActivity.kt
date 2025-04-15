@@ -174,7 +174,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun proceedToApp(userId: Int = -1) {
-        val intent = Intent(this@LoginActivity, PasswordGroupesActivity::class.java)
+        val intent = Intent(this@LoginActivity, PasswordAllActivity::class.java)
         if (userId != -1) {
             intent.putExtra("USER_ID", userId)
         }

@@ -28,9 +28,11 @@ class PasswordDetailsActivity : AppCompatActivity() {
     private lateinit var biometricSwitch: SwitchMaterial
     private lateinit var togglePasswordVisibility: ImageButton
     private lateinit var progressIndicator: CircularProgressIndicator
+    private lateinit var passwordSecurityManager: PasswordSecurityManager
 
     private var passwordId: Long = 0
     private var actualPassword: String = "" // Pour stocker le mot de passe actuel
+    private var decryptedPassword: String = "" // Pour stocker le mot de passe déchiffré
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,9 @@ class PasswordDetailsActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // Initialiser le gestionnaire de sécurité des mots de passe
+        passwordSecurityManager = PasswordSecurityManager(this)
 
         // Récupère l'ID du mot de passe depuis l'intent (pour une utilisation future)
         if (intent.hasExtra("PASSWORD_ID")) {
@@ -73,7 +78,7 @@ class PasswordDetailsActivity : AppCompatActivity() {
             intent.putExtra("PASSWORD_ID", passwordId)
             intent.putExtra("SITE_NAME", siteValue.text.toString())
             intent.putExtra("USERNAME", usernameValue.text.toString())
-            intent.putExtra("PASSWORD", actualPassword)
+            intent.putExtra("PASSWORD", decryptedPassword)  // Passer le mot de passe déchiffré
             intent.putExtra("NOTES", notesValue.text.toString())
             intent.putExtra("BIOMETRIC", biometricSwitch.isChecked)
             startActivity(intent)
@@ -85,8 +90,8 @@ class PasswordDetailsActivity : AppCompatActivity() {
             isPasswordVisible = !isPasswordVisible
 
             if (isPasswordVisible) {
-                // Affiche le mot de passe
-                passwordValue.text = actualPassword
+                // Affiche le mot de passe déchiffré
+                passwordValue.text = decryptedPassword
                 togglePasswordVisibility.setImageResource(R.drawable.ic_visibility_on)
             } else {
                 // Masque le mot de passe
@@ -101,7 +106,6 @@ class PasswordDetailsActivity : AppCompatActivity() {
         progressIndicator.visibility = View.VISIBLE
 
         // Effectue l'appel API
-
         ApiClient.apiService.getPasswordById(passwordId.toInt()).enqueue(object : Callback<PasswordResponse> {
             override fun onResponse(call: Call<PasswordResponse>, response: Response<PasswordResponse>) {
                 // Cache l'indicateur de chargement
@@ -147,9 +151,33 @@ class PasswordDetailsActivity : AppCompatActivity() {
         siteValue.text = data.site_name
         usernameValue.text = data.username
 
-        // Stocke le mot de passe réel, mais affiche des points pour le masquer
+        // Stocke le mot de passe chiffré
         actualPassword = data.password
-        passwordValue.text = "••••••••••••••"
+
+        try {
+            // Tente de déchiffrer le mot de passe
+            val siteKey = "${data.site_name}:${data.username}"
+            decryptedPassword = passwordSecurityManager.decryptPassword(actualPassword, siteKey)
+
+            // Si le déchiffrement réussit, mettre à jour passwordValue (masqué)
+            passwordValue.text = "••••••••••••••"
+        } catch (e: Exception) {
+            // En cas d'échec de déchiffrement (peut-être un ancien mot de passe non chiffré)
+            Log.w("DECRYPTION", "Impossible de déchiffrer le mot de passe, utilisation du mot de passe tel quel", e)
+
+            // Utilise le mot de passe tel qu'il est dans la base (pour rétrocompatibilité)
+            decryptedPassword = actualPassword
+            passwordValue.text = "••••••••••••••"
+
+            // Informe l'utilisateur seulement en cas d'erreur grave
+            if (e.message?.contains("IV not found") == true) {
+                Toast.makeText(
+                    this@PasswordDetailsActivity,
+                    "Ce mot de passe peut avoir été créé sur un autre appareil",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
 
         // Affiche les notes
         notesValue.text = data.notes.ifEmpty { "Aucune note" }
